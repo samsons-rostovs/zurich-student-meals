@@ -9,7 +9,11 @@ load_dotenv()
 
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
-RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL")
+RECEIVER_EMAILS = [
+    email.strip()
+    for email in os.getenv("RECEIVER_EMAIL", "").split(",")
+    if email.strip()
+]
 
 
 def send_email(meals):
@@ -29,7 +33,7 @@ def send_email(meals):
 
     msg["Subject"] = "Cheapest Meals in Zurich"
     msg["From"] = EMAIL_ADDRESS
-    msg["To"] = RECEIVER_EMAIL
+    msg["To"] = ", ".join(RECEIVER_EMAILS)
 
     server = smtplib.SMTP("smtp.gmail.com", 587)
 
@@ -40,7 +44,11 @@ def send_email(meals):
         EMAIL_PASSWORD
     )
 
-    server.send_message(msg)
+    server.sendmail(
+        EMAIL_ADDRESS,
+        RECEIVER_EMAILS,
+        msg.as_string()
+    )
 
     server.quit()
 
