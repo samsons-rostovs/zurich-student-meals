@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 ETH_MENSAS = {
@@ -13,7 +13,15 @@ def scrape_eth_mensas():
 
     meals = []
 
-    today = datetime.today().isoweekday()
+    today_date = datetime.today().strftime("%Y-%m-%d")
+
+    current_date = datetime.today()
+
+    valid_after = current_date.strftime("%Y-%m-%d")
+
+    valid_before = (
+        current_date + timedelta(days=7)
+    ).strftime("%Y-%m-%d")
 
     for mensa_name, facility_id in ETH_MENSAS.items():
 
@@ -23,8 +31,8 @@ def scrape_eth_mensas():
             f"&lang=de"
             f"&rs-first=0"
             f"&rs-size=50"
-            f"&valid-after=2026-05-11"
-            f"&valid-before=2026-05-18"
+            f"&valid-after={valid_after}"
+            f"&valid-before={valid_before}"
             f"&facility={facility_id}"
         )
 
@@ -36,11 +44,25 @@ def scrape_eth_mensas():
 
         for rota in weekly_rotas:
 
+            # filter only the rota containing today's date
+            rota_valid_from = rota.get("valid-from")
+            rota_valid_to = rota.get("valid-to")
+
+            if not (
+                rota_valid_from <= valid_after <= rota_valid_to
+            ):
+                continue
+
             days = rota.get("day-of-week-array", [])
 
             for day in days:
 
-                if day["day-of-week-code"] != today:
+                # ETH API does not always provide a "date" field
+                # so we compare weekday numbers instead
+
+                today_weekday = datetime.today().isoweekday()
+
+                if day.get("day-of-week-code") != today_weekday:
                     continue
 
                 opening_hours = day.get(
@@ -63,6 +85,10 @@ def scrape_eth_mensas():
 
                         # skip evening meals
                         if "abend" in meal_time_name:
+                            continue
+
+                        # skip snacks / desserts / buffet spam
+                        if "smoothie" in meal_time_name:
                             continue
 
                         lines = meal_time.get(
