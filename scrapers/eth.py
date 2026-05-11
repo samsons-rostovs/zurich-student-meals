@@ -56,6 +56,14 @@ def scrape_eth_mensas():
                     )
 
                     for meal_time in meal_times:
+                        meal_time_name = meal_time.get(
+                            "name",
+                            ""
+                        ).lower()
+
+                        # skip evening meals
+                        if "abend" in meal_time_name:
+                            continue
 
                         lines = meal_time.get(
                             "line-array",
