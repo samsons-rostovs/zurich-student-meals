@@ -1,91 +1,35 @@
-import requests
-import json
-import re
+from scrapers.uzh import scrape_uzh_mensa
+from scrapers.eth import scrape_eth_mensas
+from emailer import send_email
 
-url = "https://app.food2050.ch/de/v2/zfv/universitat-zurich,campus-zentrum/untere-mensa/mittagsverpflegung/menu/daily"
+MENSAS = {
+    "Untere Mensa UZH":
+        "https://app.food2050.ch/de/v2/zfv/universitat-zurich,campus-zentrum/untere-mensa/mittagsverpflegung/menu/daily",
 
-response = requests.get(url)
+    "Obere Mensa UZH":
+        "https://app.food2050.ch/de/v2/zfv/universitat-zurich,campus-zentrum/obere-mensa/mittagsverpflegung/menu/daily"
+}
 
-html = response.text
+all_meals = []
 
-match = re.search(
-    r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>',
-    html
-)
+for mensa_name, url in MENSAS.items():
 
-if not match:
-    print("NO DATA FOUND")
-    exit()
+    meals = scrape_uzh_mensa(mensa_name, url)
 
-data = json.loads(match.group(1))
+    all_meals.extend(meals)
+eth_meals = scrape_eth_mensas()
+all_meals.extend(eth_meals)
 
-menu_items = (
-    data["props"]["pageProps"]
-    ["organisation"]["outlet"]["menuCategory"]
-    ["categoryChildren"][0]["calendar"]["day"]["menuItems"]
-)
+all_meals.sort(key=lambda x: x["price"])
 
-meals = []
+print("\nCHEAPEST MEALS IN ZURICH:\n")
 
-for item in menu_items:
-
-    category = item["category"]["name"]
-
-    detail_url = item["detailUrl"]
-
-    detail_response = requests.get(detail_url)
-
-    detail_html = detail_response.text
-
-    detail_match = re.search(
-        r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>',
-        detail_html
-    )
-
-    if not detail_match:
-        continue
-
-    detail_data = json.loads(detail_match.group(1))
-
-    try:
-        menu_item = (
-            detail_data["props"]["pageProps"]
-            ["organisation"]["outlet"]["menuCategory"]
-            ["menuItem"]
-        )
-
-        dish = menu_item["dish"]
-
-        name = dish["name"]
-
-        prices = menu_item["prices"]
-
-        student_price = None
-
-        for price in prices:
-            category_name = price["priceCategory"]["name"]
-
-            if "Stud" in category_name:
-                student_price = float(price["amount"])
-                break
-
-        meals.append({
-            "category": category,
-            "name": name,
-            "price": student_price
-        })
-
-    except Exception as e:
-        print("ERROR:", e)
-
-# sort cheapest first
-meals.sort(key=lambda x: x["price"])
-
-print("\nCHEAPEST MEALS TODAY:\n")
-
-for meal in meals:
+for meal in all_meals:
     print(
         f"{meal['price']} CHF | "
+        f"{meal['mensa']} | "
         f"{meal['category']} | "
         f"{meal['name']}"
     )
+
+send_email(all_meals)
