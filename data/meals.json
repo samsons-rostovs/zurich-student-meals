@@ -1,0 +1,110 @@
+[
+    {
+        "mensa": "Untere Mensa UZH",
+        "category": "garden",
+        "name": "CURRYWURST",
+        "price": 6.1
+    },
+    {
+        "mensa": "Obere Mensa UZH",
+        "category": "farm",
+        "name": "CANNELONI",
+        "price": 6.1
+    },
+    {
+        "mensa": "ETH Polyterrasse",
+        "category": "GARDEN",
+        "name": "Spargel Risotto",
+        "price": 7.0
+    },
+    {
+        "mensa": "Untere Mensa UZH",
+        "category": "butcher",
+        "name": "ZÜRCHER ART",
+        "price": 7.5
+    },
+    {
+        "mensa": "Obere Mensa UZH",
+        "category": "butcher",
+        "name": "ZÜRCHER ART",
+        "price": 7.5
+    },
+    {
+        "mensa": "Food&Lab",
+        "category": "Pasta",
+        "name": "PASTA PLAUSCH",
+        "price": 7.9
+    },
+    {
+        "mensa": "Archimedes",
+        "category": "The Gardener",
+        "name": "Burratine Cremosa",
+        "price": 7.9
+    },
+    {
+        "mensa": "ETH Polyterrasse",
+        "category": "VEGAN",
+        "name": "Plantbased Geschnetzeltes Zürcher Art",
+        "price": 8.5
+    },
+    {
+        "mensa": "ETH Polyterrasse",
+        "category": "HOME",
+        "name": "Tortellini carne",
+        "price": 8.5
+    },
+    {
+        "mensa": "Archimedes",
+        "category": "The Chef",
+        "name": "Kalbsbratwurst",
+        "price": 8.9
+    },
+    {
+        "mensa": "Untere Mensa UZH",
+        "category": "pure asia",
+        "name": "SCHNITZEL TON KATSU",
+        "price": 9.0
+    },
+    {
+        "mensa": "Archimedes",
+        "category": "The Farmer",
+        "name": "Grüne Teigwaren Salat Bowl",
+        "price": 9.5
+    },
+    {
+        "mensa": "Obere Mensa UZH",
+        "category": "voll anders",
+        "name": "PANIERTES SCHNITZEL",
+        "price": 9.9
+    },
+    {
+        "mensa": "Archimedes",
+        "category": "The Traveller",
+        "name": "Randen Falafel",
+        "price": 9.9
+    },
+    {
+        "mensa": "Food&Lab",
+        "category": "East",
+        "name": "ORGANIC BEAN BURGER",
+        "price": 10.9
+    },
+    {
+        "mensa": "Food&Lab",
+        "category": "West",
+        "name": "FOODLAB CHEESE BURGER",
+        "price": 11.9
+    },
+    {
+        "mensa": "ETH Polyterrasse",
+        "category": "STREET",
+        "name": "Greek Chicken",
+        "price": 12.5
+    },
+    {
+        "mensa": "Archimedes",
+        "category": "The Expert",
+        "name": "Avocado Chicken Burger",
+        "price": 12.5
+    }
+]
