@@ -2,7 +2,9 @@ name: Daily Zurich Meals
 
 on:
   schedule:
-    - cron: "07 14 * * 1-5"
+    - cron: "16 16 * * 1-5"
+      timezone: "Europe/Zurich"
+
   workflow_dispatch:
 
 jobs:
