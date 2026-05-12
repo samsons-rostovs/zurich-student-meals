@@ -16,6 +16,7 @@ def scrape_eth_mensas():
     current_date = datetime.today()
 
     valid_after = current_date.strftime("%Y-%m-%d")
+    today_date = current_date.strftime("%Y-%m-%d")
 
     valid_before = (
         current_date + timedelta(days=7)
@@ -149,7 +150,13 @@ def scrape_eth_mensas():
                                 "mensa": mensa_name,
                                 "category": category_name,
                                 "name": name,
-                                "price": student_price
+                                "price": student_price,
+                                "url": (
+                                    "https://ethz.ch/de/campus/erleben/"
+                                    "gastronomie-und-einkaufen/gastronomie/"
+                                    f"menueplaene/offerDay.html?date={today_date}"
+                                    f"&id={facility_id}"
+                                )
                             })
 
     return meals

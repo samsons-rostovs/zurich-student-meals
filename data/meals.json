@@ -3,108 +3,126 @@
         "mensa": "Untere Mensa UZH",
         "category": "garden",
         "name": "CURRYWURST",
-        "price": 6.1
+        "price": 6.1,
+        "url": "https://app.food2050.ch/de/v2/zfv/universitat-zurich,campus-zentrum/untere-mensa/mittagsverpflegung,hauptspeisen,garden/2026-05-12"
     },
     {
         "mensa": "Obere Mensa UZH",
         "category": "farm",
         "name": "CANNELONI",
-        "price": 6.1
+        "price": 6.1,
+        "url": "https://app.food2050.ch/de/v2/zfv/universitat-zurich,campus-zentrum/obere-mensa/mittagsverpflegung,unten,farm/2026-05-12"
     },
     {
         "mensa": "ETH Polyterrasse",
         "category": "GARDEN",
         "name": "Spargel Risotto",
-        "price": 7.0
+        "price": 7.0,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=9"
     },
     {
         "mensa": "Untere Mensa UZH",
         "category": "butcher",
         "name": "ZÜRCHER ART",
-        "price": 7.5
+        "price": 7.5,
+        "url": "https://app.food2050.ch/de/v2/zfv/universitat-zurich,campus-zentrum/untere-mensa/mittagsverpflegung,hauptspeisen,butcher/2026-05-12"
     },
     {
         "mensa": "Obere Mensa UZH",
         "category": "butcher",
         "name": "ZÜRCHER ART",
-        "price": 7.5
+        "price": 7.5,
+        "url": "https://app.food2050.ch/de/v2/zfv/universitat-zurich,campus-zentrum/obere-mensa/mittagsverpflegung,unten,butcher/2026-05-12"
     },
     {
         "mensa": "Food&Lab",
         "category": "Pasta",
         "name": "PASTA PLAUSCH",
-        "price": 7.9
+        "price": 7.9,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=7"
     },
     {
         "mensa": "Archimedes",
         "category": "The Gardener",
         "name": "Burratine Cremosa",
-        "price": 7.9
+        "price": 7.9,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=8"
     },
     {
         "mensa": "ETH Polyterrasse",
         "category": "VEGAN",
         "name": "Plantbased Geschnetzeltes Zürcher Art",
-        "price": 8.5
+        "price": 8.5,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=9"
     },
     {
         "mensa": "ETH Polyterrasse",
         "category": "HOME",
         "name": "Tortellini carne",
-        "price": 8.5
+        "price": 8.5,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=9"
     },
     {
         "mensa": "Archimedes",
         "category": "The Chef",
         "name": "Kalbsbratwurst",
-        "price": 8.9
+        "price": 8.9,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=8"
     },
     {
         "mensa": "Untere Mensa UZH",
         "category": "pure asia",
         "name": "SCHNITZEL TON KATSU",
-        "price": 9.0
+        "price": 9.0,
+        "url": "https://app.food2050.ch/de/v2/zfv/universitat-zurich,campus-zentrum/untere-mensa/mittagsverpflegung,hauptspeisen,pure-asia/2026-05-12"
     },
     {
         "mensa": "Archimedes",
         "category": "The Farmer",
         "name": "Grüne Teigwaren Salat Bowl",
-        "price": 9.5
+        "price": 9.5,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=8"
     },
     {
         "mensa": "Obere Mensa UZH",
         "category": "voll anders",
         "name": "PANIERTES SCHNITZEL",
-        "price": 9.9
+        "price": 9.9,
+        "url": "https://app.food2050.ch/de/v2/zfv/universitat-zurich,campus-zentrum/obere-mensa/mittagsverpflegung,unten,voll-anders/2026-05-12"
     },
     {
         "mensa": "Archimedes",
         "category": "The Traveller",
         "name": "Randen Falafel",
-        "price": 9.9
+        "price": 9.9,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=8"
     },
     {
         "mensa": "Food&Lab",
         "category": "East",
         "name": "ORGANIC BEAN BURGER",
-        "price": 10.9
+        "price": 10.9,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=7"
     },
     {
         "mensa": "Food&Lab",
         "category": "West",
         "name": "FOODLAB CHEESE BURGER",
-        "price": 11.9
+        "price": 11.9,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=7"
     },
     {
         "mensa": "ETH Polyterrasse",
         "category": "STREET",
         "name": "Greek Chicken",
-        "price": 12.5
+        "price": 12.5,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=9"
     },
     {
         "mensa": "Archimedes",
         "category": "The Expert",
         "name": "Avocado Chicken Burger",
-        "price": 12.5
+        "price": 12.5,
+        "url": "https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene/offerDay.html?date=2026-05-12&id=8"
     }
 ]

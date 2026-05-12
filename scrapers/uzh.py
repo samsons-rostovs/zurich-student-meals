@@ -75,7 +75,8 @@ def scrape_uzh_mensa(mensa_name, url):
                     "mensa": mensa_name,
                     "category": category,
                     "name": name,
-                    "price": student_price
+                    "price": student_price,
+                    "url": detail_url
                 })
 
         except Exception as e:

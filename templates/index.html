@@ -66,8 +66,12 @@
                     Cheapest Meal
                 </div>
 
-                <div class="text-3xl font-bold text-green-400">
+                <div class="text-3xl font-bold text-green-400 mb-2">
                     {{ meals[0].price }} CHF
+                </div>
+
+                <div class="text-zinc-300 text-sm leading-relaxed">
+                    {{ meals[0].name.title() }}
                 </div>
 
             </div>
@@ -98,14 +102,19 @@
 
                 {% for meal in meals[:3] %}
 
-                <div class="bg-gradient-to-br
-                            from-zinc-900
-                            to-zinc-950
-                            border border-zinc-800
-                            rounded-3xl
-                            p-6
-                            hover:scale-[1.02]
-                            transition">
+                <a
+                    href="{{ meal.url }}"
+                    target="_blank"
+                    class="block
+                           bg-gradient-to-br
+                           from-zinc-900
+                           to-zinc-950
+                           border border-zinc-800
+                           rounded-3xl
+                           p-6
+                           hover:scale-[1.02]
+                           hover:border-zinc-600
+                           transition">
 
                     <div class="flex justify-between items-start mb-4">
 
@@ -203,7 +212,7 @@
 
                     </div>
 
-                </div>
+                </a>
 
                 {% endfor %}
 
@@ -249,14 +258,18 @@
 
                 {% for meal in meals %}
 
-                <div class="meal-card
-                            bg-zinc-900
-                            border border-zinc-800
-                            rounded-2xl
-                            p-6
-                            hover:border-zinc-600
-                            hover:-translate-y-1
-                            transition"
+                <a
+                    href="{{ meal.url }}"
+                    target="_blank"
+                    class="meal-card
+                           block
+                           bg-zinc-900
+                           border border-zinc-800
+                           rounded-2xl
+                           p-6
+                           hover:border-zinc-600
+                           hover:-translate-y-1
+                           transition"
 
                      data-name="{{ meal.name.lower() }}"
                      data-mensa="{{ meal.mensa.lower() }}"
@@ -359,7 +372,7 @@
 
                     </div>
 
-                </div>
+                </a>
 
                 {% endfor %}
 
