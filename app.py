@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 from flask import Flask, render_template
 
@@ -8,6 +9,11 @@ from scrapers.eth import scrape_eth_mensas
 
 
 app = Flask(__name__)
+
+
+CACHE_FILE = "data/meals.json"
+
+CACHE_DURATION = 900
 
 
 MENSAS = {
@@ -20,6 +26,8 @@ MENSAS = {
 
 
 def generate_cache():
+
+    print("UPDATING CACHE...")
 
     all_meals = []
 
@@ -40,10 +48,13 @@ def generate_cache():
         key=lambda x: x["price"]
     )
 
-    os.makedirs("data", exist_ok=True)
+    os.makedirs(
+        "data",
+        exist_ok=True
+    )
 
     with open(
-        "data/meals.json",
+        CACHE_FILE,
         "w",
         encoding="utf-8"
     ) as file:
@@ -55,15 +66,31 @@ def generate_cache():
             indent=4
         )
 
+    print("CACHE UPDATED!")
+
+
+def cache_expired():
+
+    if not os.path.exists(CACHE_FILE):
+        return True
+
+    modified_time = os.path.getmtime(
+        CACHE_FILE
+    )
+
+    age = time.time() - modified_time
+
+    return age > CACHE_DURATION
+
 
 @app.route("/")
 def home():
 
-    if not os.path.exists("data/meals.json"):
+    if cache_expired():
         generate_cache()
 
     with open(
-        "data/meals.json",
+        CACHE_FILE,
         "r",
         encoding="utf-8"
     ) as file:
