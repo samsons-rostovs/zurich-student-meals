@@ -1,15 +1,26 @@
 # Zurich Student Meals
 
-A Python-based meal aggregation system that collects and ranks the cheapest student lunch options across ETH Zürich and UZH cafeterias.
+A full-stack meal aggregation platform that collects, ranks, caches, and serves the cheapest student lunch options across ETH Zürich and UZH cafeterias.
+
+## Live Demo
+
+🌐 Deployed web app:
+
+Zurich Student Meals – https://zurich-student-meals.onrender.com
 
 ## Features
 
 - Aggregates meals from multiple ETH Zürich and UZH mensas
 - Automatically extracts student pricing information
 - Sorts meals by cheapest price
-- Sends automated email notifications
-- Supports scheduled execution using cron
-- Uses reverse-engineered APIs and structured JSON extraction
+- Fast cached backend architecture using JSON caching
+- Interactive Flask web dashboard
+- Live meal search and filtering
+- Clickable meal cards linking to official ETH/UZH pages
+- Automated email notifications
+- Scheduled GitHub Actions automation
+- Reverse-engineered APIs and structured JSON extraction
+- Modern responsive UI using Tailwind CSS
 
 ## Supported Mensas
 
@@ -33,15 +44,34 @@ CHEAPEST MEALS IN ZURICH:
 7.9 CHF | Food&Lab | Pasta | PASTA PLAUSCH
 ```
 
+## Web Dashboard
+
+The project now includes a deployed Flask web application with:
+
+- Real-time meal search
+- Category badges and icons
+- Responsive card-based UI
+- Automatic cache invalidation
+- Official mensa links
+- ETH + UZH integration
+
 ## Project Structure
 
 ```text
 zurich-student-meals/
+├── app.py
 ├── main.py
+├── update_cache.py
 ├── emailer.py
+├── data/
+│   └── meals.json
 ├── scrapers/
 │   ├── eth.py
 │   └── uzh.py
+├── templates/
+│   └── index.html
+├── .github/workflows/
+│   └── daily_meals.yml
 ├── .env
 ├── README.md
 └── requirements.txt
@@ -76,36 +106,46 @@ Create a `.env` file in the project root:
 ```env
 EMAIL_ADDRESS=your_email@gmail.com
 EMAIL_PASSWORD=your_google_app_password
-RECEIVER_EMAIL=your_email@gmail.com
+RECEIVER_EMAIL=email1@gmail.com,email2@gmail.com
 ```
 
-## Running the Project
+## Running the Web App
 
 ```bash
-python3 main.py
+python update_cache.py
+python app.py
 ```
 
-## Cron Automation
+Then open:
 
-Example cron configuration for weekday execution at 10:30:
-
-```cron
-30 10 * * 1-5 /path/to/venv/bin/python3 /path/to/zurich-student-meals/main.py
+```text
+http://127.0.0.1:5000
 ```
+
+## Deployment
+
+The project is deployed using:
+
+- Render (Flask hosting)
+- GitHub Actions (scheduled automation)
+- Gunicorn (production WSGI server)
 
 ## Technical Highlights
 
 - Reverse-engineered undocumented ETH Zürich and UZH menu APIs
-- Extracted structured data from heterogeneous web systems
-- Implemented modular scraping architecture
-- Automated ranking and notification pipeline
-- Built using Python, requests, BeautifulSoup, SMTP, and JSON parsing
+- Built a modular multi-source scraping architecture
+- Implemented automatic cache invalidation for performance optimization
+- Designed a responsive Tailwind-powered frontend
+- Added live client-side filtering with JavaScript
+- Automated scheduled scraping and notifications using GitHub Actions
+- Implemented cloud deployment using Render and Gunicorn
 
 ## Future Improvements
 
 - Telegram bot integration
-- Dynamic date handling
-- Web dashboard
 - Historical meal price tracking
-- Protein/calorie ranking
+- Nutrition/protein ranking
+- Public JSON API endpoint
+- Interactive charts and statistics
 - Additional Zurich food providers
+- Personalized meal recommendations
