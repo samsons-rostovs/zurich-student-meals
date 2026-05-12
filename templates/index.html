@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Zurich Student Meals</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-zinc-950 text-white min-h-screen">
+
+    <div class="max-w-7xl mx-auto px-6 py-10">
+
+        <!-- HEADER -->
+
+        <div class="mb-12">
+
+            <div class="flex items-center gap-4 mb-4">
+
+                <div class="text-6xl">
+                    🍽️
+                </div>
+
+                <div>
+
+                    <h1 class="text-5xl font-bold">
+                        Zurich Student Meals
+                    </h1>
+
+                    <p class="text-zinc-400 text-lg mt-2">
+                        Cheapest ETH & UZH meals today
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+
+                <div class="text-zinc-400 text-sm mb-2">
+                    Meals Today
+                </div>
+
+                <div class="text-3xl font-bold">
+                    {{ meals|length }}
+                </div>
+
+            </div>
+
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+
+                <div class="text-zinc-400 text-sm mb-2">
+                    Cheapest Meal
+                </div>
+
+                <div class="text-3xl font-bold text-green-400">
+                    {{ meals[0].price }} CHF
+                </div>
+
+            </div>
+
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+
+                <div class="text-zinc-400 text-sm mb-2">
+                    Sources
+                </div>
+
+                <div class="text-3xl font-bold">
+                    ETH + UZH
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TOP 3 -->
+
+        <div class="mb-12">
+
+            <h2 class="text-2xl font-bold mb-6">
+                🔥 Cheapest Right Now
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                {% for meal in meals[:3] %}
+
+                <div class="bg-gradient-to-br
+                            from-zinc-900
+                            to-zinc-950
+                            border border-zinc-800
+                            rounded-3xl
+                            p-6
+                            hover:scale-[1.02]
+                            transition">
+
+                    <div class="flex justify-between items-start mb-4">
+
+                        <div>
+
+                            <div class="text-lg font-bold">
+                                {{ meal.name.title() }}
+                            </div>
+
+                            <div class="text-zinc-400 text-sm mt-2">
+                                {{ meal.mensa }}
+                            </div>
+
+                        </div>
+
+                        <div class="text-green-400
+                                    text-2xl
+                                    font-bold
+                                    whitespace-nowrap">
+
+                            {{ meal.price }} CHF
+
+                        </div>
+
+                    </div>
+
+                    {% set category = meal.category.lower() %}
+
+                    <div class="
+                        inline-flex
+                        items-center
+                        gap-2
+                        px-3 py-1
+                        rounded-full
+                        text-sm
+
+                        {% if 'vegan' in category
+                              or 'garden' in category
+                              or 'gardener' in category
+                              or 'farmer' in category %}
+
+                            bg-green-900 text-green-300
+
+                        {% elif 'street' in category
+                                or 'traveller' in category
+                                or 'butcher' in category %}
+
+                            bg-red-900 text-red-300
+
+                        {% elif 'home' in category
+                                or 'chef' in category
+                                or 'pasta' in category %}
+
+                            bg-yellow-900 text-yellow-300
+
+                        {% else %}
+
+                            bg-zinc-800 text-zinc-300
+
+                        {% endif %}
+                    ">
+
+                        {% if 'vegan' in category
+                              or 'garden' in category
+                              or 'gardener' in category %}
+
+                            🌱
+
+                        {% elif 'farmer' in category %}
+
+                            🚜
+
+                        {% elif 'street' in category
+                                or 'traveller' in category %}
+
+                            🔥
+
+                        {% elif 'butcher' in category %}
+
+                            🥩
+
+                        {% elif 'home' in category
+                                or 'chef' in category
+                                or 'pasta' in category %}
+
+                            🍝
+
+                        {% else %}
+
+                            🍽️
+
+                        {% endif %}
+
+                        {{ meal.category.title() }}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!-- ALL MEALS -->
+
+        <div>
+
+            <div class="flex items-center justify-between mb-6">
+
+                <h2 class="text-2xl font-bold">
+                    🍴 All Meals
+                </h2>
+
+            </div>
+
+            <!-- SEARCH -->
+
+            <div class="mb-6">
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search meals..."
+                    class="w-full
+                           bg-zinc-900
+                           border border-zinc-800
+                           rounded-2xl
+                           px-5 py-4
+                           text-white
+                           placeholder-zinc-500
+                           focus:outline-none
+                           focus:border-zinc-600">
+
+            </div>
+
+            <!-- GRID -->
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                {% for meal in meals %}
+
+                <div class="meal-card
+                            bg-zinc-900
+                            border border-zinc-800
+                            rounded-2xl
+                            p-6
+                            hover:border-zinc-600
+                            hover:-translate-y-1
+                            transition"
+
+                     data-name="{{ meal.name.lower() }}"
+                     data-mensa="{{ meal.mensa.lower() }}"
+                     data-category="{{ meal.category.lower() }}">
+
+                    <div class="flex justify-between items-start gap-4 mb-4">
+
+                        <div class="min-w-0">
+
+                            <div class="text-xl font-bold leading-tight">
+                                {{ meal.name.title() }}
+                            </div>
+
+                            <div class="text-zinc-400 mt-2">
+                                {{ meal.mensa }}
+                            </div>
+
+                        </div>
+
+                        <div class="text-green-400
+                                    font-bold
+                                    text-2xl
+                                    whitespace-nowrap
+                                    shrink-0">
+
+                            {{ meal.price }} CHF
+
+                        </div>
+
+                    </div>
+
+                    {% set category = meal.category.lower() %}
+
+                    <div class="
+                        inline-flex
+                        items-center
+                        gap-2
+                        px-3 py-1
+                        rounded-full
+                        text-sm
+
+                        {% if 'vegan' in category
+                              or 'garden' in category
+                              or 'gardener' in category
+                              or 'farmer' in category %}
+
+                            bg-green-900 text-green-300
+
+                        {% elif 'street' in category
+                                or 'traveller' in category
+                                or 'butcher' in category %}
+
+                            bg-red-900 text-red-300
+
+                        {% elif 'home' in category
+                                or 'chef' in category
+                                or 'pasta' in category %}
+
+                            bg-yellow-900 text-yellow-300
+
+                        {% else %}
+
+                            bg-zinc-800 text-zinc-300
+
+                        {% endif %}
+                    ">
+
+                        {% if 'vegan' in category
+                              or 'garden' in category
+                              or 'gardener' in category %}
+
+                            🌱
+
+                        {% elif 'farmer' in category %}
+
+                            🚜
+
+                        {% elif 'street' in category
+                                or 'traveller' in category %}
+
+                            🔥
+
+                        {% elif 'butcher' in category %}
+
+                            🥩
+
+                        {% elif 'home' in category
+                                or 'chef' in category
+                                or 'pasta' in category %}
+
+                            🍝
+
+                        {% else %}
+
+                            🍽️
+
+                        {% endif %}
+
+                        {{ meal.category.title() }}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SEARCH SCRIPT -->
+
+    <script>
+
+        const searchInput =
+            document.getElementById("searchInput")
+
+        const mealCards =
+            document.querySelectorAll(".meal-card")
+
+        searchInput.addEventListener("input", () => {
+
+            const query =
+                searchInput.value.toLowerCase()
+
+            mealCards.forEach(card => {
+
+                const name =
+                    card.dataset.name
+
+                const mensa =
+                    card.dataset.mensa
+
+                const category =
+                    card.dataset.category
+
+                const matches =
+                    name.includes(query) ||
+                    mensa.includes(query) ||
+                    category.includes(query)
+
+                if (matches) {
+                    card.style.display = "block"
+                } else {
+                    card.style.display = "none"
+                }
+
+            })
+
+        })
+
+    </script>
+
+</body>
+</html>

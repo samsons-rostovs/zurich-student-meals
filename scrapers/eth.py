@@ -13,8 +13,6 @@ def scrape_eth_mensas():
 
     meals = []
 
-    today_date = datetime.today().strftime("%Y-%m-%d")
-
     current_date = datetime.today()
 
     valid_after = current_date.strftime("%Y-%m-%d")
@@ -44,7 +42,6 @@ def scrape_eth_mensas():
 
         for rota in weekly_rotas:
 
-            # filter only the rota containing today's date
             rota_valid_from = rota.get("valid-from")
             rota_valid_to = rota.get("valid-to")
 
@@ -56,9 +53,6 @@ def scrape_eth_mensas():
             days = rota.get("day-of-week-array", [])
 
             for day in days:
-
-                # ETH API does not always provide a "date" field
-                # so we compare weekday numbers instead
 
                 today_weekday = datetime.today().isoweekday()
 
@@ -78,16 +72,15 @@ def scrape_eth_mensas():
                     )
 
                     for meal_time in meal_times:
+
                         meal_time_name = meal_time.get(
                             "name",
                             ""
                         ).lower()
 
-                        # skip evening meals
                         if "abend" in meal_time_name:
                             continue
 
-                        # skip snacks / desserts / buffet spam
                         if "smoothie" in meal_time_name:
                             continue
 
@@ -108,8 +101,19 @@ def scrape_eth_mensas():
                                 "Unknown"
                             )
 
-                            # filter spam entries
+                            category_name = line.get(
+                                "name",
+                                "Unknown"
+                            )
+
                             lower_name = name.lower()
+                            lower_category = category_name.lower()
+
+                            if "smoothie" in lower_name:
+                                continue
+
+                            if "smoothie" in lower_category:
+                                continue
 
                             if "dessert" in lower_name:
                                 continue
@@ -143,10 +147,7 @@ def scrape_eth_mensas():
 
                             meals.append({
                                 "mensa": mensa_name,
-                                "category": line.get(
-                                    "name",
-                                    "Unknown"
-                                ),
+                                "category": category_name,
                                 "name": name,
                                 "price": student_price
                             })
